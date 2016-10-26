@@ -1,0 +1,7 @@
+data <- read.csv.sql("./data/household_power_consumption.txt", "select * from file where Date ='1/2/2007' OR Date ='2/2/2007'",sep=";",header=TRUE,eol = "\n")
+data$Date<-as.Date(data$Date)
+data$datetime<-strptime(paste(data$Date, data$Time,sep = " "), format="%d/%m/%Y %H:%M:%S")
+grep("\\?",data)
+plot(data$datetime,data$Global_active_power,xlab="",ylab="Global Active Power (kilowatts)",type="l")
+dev.copy(png,file="plot2.png")
+dev.off()
